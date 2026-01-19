@@ -4,6 +4,7 @@ import AboutPage from './pages/AboutPage'
 import CounterPage from './pages/CounterPage'
 import PokemonPage from './pages/PokemonPage'
 import NotesPage from './pages/NotesPage'
+import ContactPage from './pages/ContactPage'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('todos')
@@ -40,6 +41,12 @@ function App() {
                 Notes
               </button>
               <button
+                onClick={() => setCurrentPage('contact')}
+                className={`px-4 py-2 rounded ${currentPage === 'contact' ? 'bg-[#646cff] text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`}
+              >
+                Contact
+              </button>
+              <button
                 onClick={() => setCurrentPage('about')}
                 className={`px-4 py-2 rounded ${currentPage === 'about' ? 'bg-[#646cff] text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`}
               >
@@ -54,6 +61,7 @@ function App() {
         {currentPage === 'counter' && <CounterPage />}
         {currentPage === 'pokemon' && <PokemonPage />}
         {currentPage === 'notes' && <NotesPage />}
+        {currentPage === 'contact' && <ContactPage />}
         {currentPage === 'about' && <AboutPage />}
       </main>
     </div>
