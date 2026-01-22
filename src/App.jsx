@@ -1,76 +1,66 @@
-import { useState } from 'react'
+import { Routes, Route, Link, useLocation } from 'react-router-dom'
 import TodoPage from './pages/TodoPage'
 import AboutPage from './pages/AboutPage'
 import CounterPage from './pages/CounterPage'
 import PokemonPage from './pages/PokemonPage'
+import PokemonDetailPage from './pages/PokemonDetailPage'
 import NotesPage from './pages/NotesPage'
 import ContactPage from './pages/ContactPage'
 import FeaturesPage from './pages/FeaturesPage'
+import NotFoundPage from './pages/NotFoundPage'
+
+function NavLink({ to, children }) {
+  const location = useLocation()
+  const isActive = location.pathname === to
+
+  return (
+    <Link
+      to={to}
+      className={`px-4 py-2 rounded ${
+        isActive
+          ? 'bg-[#646cff] text-white'
+          : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+      }`}
+    >
+      {children}
+    </Link>
+  )
+}
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('todos')
-
   return (
     <div className="min-h-screen bg-white dark:bg-[#242424] text-[#213547] dark:text-[rgba(255,255,255,0.87)]">
       <header className="border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold">My App</h1>
+            <Link to="/" className="text-2xl font-bold">
+              My App
+            </Link>
             <nav className="flex gap-4">
-              <button
-                onClick={() => setCurrentPage('todos')}
-                className={`px-4 py-2 rounded ${currentPage === 'todos' ? 'bg-[#646cff] text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`}
-              >
-                Todos
-              </button>
-              <button
-                onClick={() => setCurrentPage('counter')}
-                className={`px-4 py-2 rounded ${currentPage === 'counter' ? 'bg-[#646cff] text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`}
-              >
-                Counter
-              </button>
-              <button
-                onClick={() => setCurrentPage('pokemon')}
-                className={`px-4 py-2 rounded ${currentPage === 'pokemon' ? 'bg-[#646cff] text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`}
-              >
-                Pokemon
-              </button>
-              <button
-                onClick={() => setCurrentPage('notes')}
-                className={`px-4 py-2 rounded ${currentPage === 'notes' ? 'bg-[#646cff] text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`}
-              >
-                Notes
-              </button>
-              <button
-                onClick={() => setCurrentPage('contact')}
-                className={`px-4 py-2 rounded ${currentPage === 'contact' ? 'bg-[#646cff] text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`}
-              >
-                Contact
-              </button>
-              <button
-                onClick={() => setCurrentPage('features')}
-                className={`px-4 py-2 rounded ${currentPage === 'features' ? 'bg-[#646cff] text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`}
-              >
-                Features
-              </button>
-              <button
-                onClick={() => setCurrentPage('about')}
-                className={`px-4 py-2 rounded ${currentPage === 'about' ? 'bg-[#646cff] text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`}
-              >
-                About
-              </button>
+              <NavLink to="/todos">Todos</NavLink>
+              <NavLink to="/counter">Counter</NavLink>
+              <NavLink to="/pokemon">Pokemon</NavLink>
+              <NavLink to="/notes">Notes</NavLink>
+              <NavLink to="/contact">Contact</NavLink>
+              <NavLink to="/features">Features</NavLink>
+              <NavLink to="/about">About</NavLink>
             </nav>
           </div>
         </div>
       </header>
       <main className="max-w-7xl mx-auto px-4 py-8">
-        {currentPage === 'todos' && <TodoPage />}
-        {currentPage === 'counter' && <CounterPage />}
-        {currentPage === 'pokemon' && <PokemonPage />}
-        {currentPage === 'notes' && <NotesPage />}
-        {currentPage === 'contact' && <ContactPage />}
-        {currentPage === 'features' && <FeaturesPage />}
-        {currentPage === 'about' && <AboutPage />}
+        <Routes>
+          <Route path="/" element={<TodoPage />} />
+          <Route path="/todos" element={<TodoPage />} />
+          <Route path="/counter" element={<CounterPage />} />
+          <Route path="/pokemon" element={<PokemonPage />} />
+          <Route path="/pokemon/:id" element={<PokemonDetailPage />} />
+          <Route path="/notes" element={<NotesPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/features" element={<FeaturesPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
     </div>
   )

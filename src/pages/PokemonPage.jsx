@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 function PokemonPage() {
   const [pokemonList, setPokemonList] = useState([])
@@ -42,9 +43,10 @@ function PokemonPage() {
       {!loading && pokemonList.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {pokemonList.map(pokemon => (
-            <div
+            <Link
               key={pokemon.id}
-              className="bg-gray-50 dark:bg-[#1a1a1a] p-4 rounded-lg border border-gray-200 dark:border-gray-700 text-center hover:shadow-lg transition-shadow"
+              to={`/pokemon/${pokemon.id}`}
+              className="bg-gray-50 dark:bg-[#1a1a1a] p-4 rounded-lg border border-gray-200 dark:border-gray-700 text-center hover:shadow-lg transition-shadow cursor-pointer"
             >
               <img
                 src={pokemon.sprites.front_default}
@@ -62,7 +64,7 @@ function PokemonPage() {
                   </span>
                 ))}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
