@@ -8,6 +8,9 @@ import NotesPage from './pages/NotesPage'
 import ContactPage from './pages/ContactPage'
 import FeaturesPage from './pages/FeaturesPage'
 import SearchPage from './pages/SearchPage'
+import ModalPage from './pages/ModalPage'
+import PaginationPage from './pages/PaginationPage'
+import TimerPage from './pages/TimerPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 function NavLink({ to, children }) {
@@ -44,6 +47,9 @@ function App() {
               <NavLink to="/notes">Notes</NavLink>
               <NavLink to="/contact">Contact</NavLink>
               <NavLink to="/search">Search</NavLink>
+              <NavLink to="/modal">Modal</NavLink>
+              <NavLink to="/pagination">Pagination</NavLink>
+              <NavLink to="/timer">Timer</NavLink>
               <NavLink to="/features">Features</NavLink>
               <NavLink to="/about">About</NavLink>
             </nav>
@@ -60,6 +66,9 @@ function App() {
           <Route path="/notes" element={<NotesPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/modal" element={<ModalPage />} />
+          <Route path="/pagination" element={<PaginationPage />} />
+          <Route path="/timer" element={<TimerPage />} />
           <Route path="/features" element={<FeaturesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<NotFoundPage />} />
